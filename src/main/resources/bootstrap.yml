@@ -1,0 +1,13 @@
+server:
+  port: 8091
+
+logging:
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /swagger-doc/v3/api-docs
+  swagger-ui:
+    path: /swagger-doc/swagger-ui.html

@@ -1,0 +1,106 @@
+openapi: 3.0.1
+
+info:
+  title: ms-example-api
+  description: API for ms-example
+  version: 1.0.0
+servers:
+  - url: https://localhost:8091
+tags:
+  - name: ms-example-api
+    description: API for ms-example
+paths:
+  /products:
+    get:
+      summary: Retrieve all products
+      operationId: retrieveAllProducts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+    post:
+      summary: Save new product
+      operationId: saveProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDTO'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+    put:
+      summary: Update an existing product
+      operationId: updateProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+  /products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: product ID
+        schema:
+          type: string
+    get:
+      summary: Retrieve a product
+      operationId: retrieveProduct
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+    delete:
+      summary: Delete a product
+      operationId: deleteProduct
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+components:
+  schemas:
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/ProductDTO"
+    ProductDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        productType:
+          type: string
+        productCategory:
+          type: string
+        state:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - productType
+        - productCategory
